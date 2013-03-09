@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- The Basics -->
+  <groupId>com.test</groupId>  					
+  <artifactId>parent</artifactId>							
+  <version>1.0</version>
+  <packaging>pom</packaging>
+								
+
+  <dependencyManagement>
+  <dependencies>
+	<dependency>
+      <id>jquery</id>
+      <groupId>jquery</groupId>  					
+      <artifactId>ui</artifactId>							
+      <version>${jqueryVersion}</version>								
+      <minimized>true</minimized>   
+    </dependency>
+     <dependency>
+      <id>spine</id>
+      <groupId>spine</groupId>  					
+      <artifactId>spine</artifactId>							
+      <version>1.2</version>								
+      <minimized>true</minimized>   
+    </dependency>
+    </dependencies>      
+  </dependencyManagement>
+  <properties>
+     <jqueryVersion>1.8.2</jqueryVersion>
+  </properties>                         
+
+  <!-- Build Settings -->
+  <build>
+   <loadOrder> 
+      <artifactID>spine</artifactID>
+       <artifactID>jquery</artifactID>
+   </loadOrder>
+ </build>                                    
+
+  <!-- Environment Settings -->
+  <repositories>
+   <repository>
+     <url>k:\sharedJS</url>
+   </repository>
+</repositories>                     
+  <localRepositoriy>
+   <repository>
+     <url>c:\repoJS</url>
+   </repository>
+</localRepositoriy>             
+</project>

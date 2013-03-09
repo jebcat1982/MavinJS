@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- The Basics -->
+  <groupId>backbone</groupId>  					
+  <artifactId>localstorage</artifactId>							
+  <version>1.8.2</version>
+  <packaging>js</packaging>
+  <parent>
+   <groupId>com.text</groupId>  					
+   <artifactId>parent</artifactId>							
+   <version>1.0</version>
+  </parent>							
+  <dependencies>
+    <dependency>
+      <id>jquery</id>
+      <groupId>jquery</groupId>  					
+      <artifactId>ui</artifactId>							
+    </dependency>
+     <dependency>
+      <id>spine</id>
+      <groupId>spine</groupId>  					
+      <artifactId>spine</artifactId>							
+    </dependency>
+    </dependencies>                               
+</project>
