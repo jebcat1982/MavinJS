@@ -1,8 +1,8 @@
-/****
- * Repo.js
+/*************************
+ * File: mavin-0.1.js
  * Author: Eran Israeli
- * 
- */
+ * License: GPLv3
+ *************************/
 
 var dataTables = 'http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js';
 var backbonejs = 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.9/backbone-min.js';
