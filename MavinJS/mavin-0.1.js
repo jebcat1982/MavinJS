@@ -93,7 +93,8 @@ $.holdReady(true);
 					version = $(xml).find("version:first").text();
 					url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
 					dependency.push(url);
-					
+					alert(url+"   loading now ....");
+					loadJsFile(url);
 			    	//clientID = $(xml).find("artifactId").text();
 			    	//alert(clientID);
 					alert(dependency);
@@ -101,6 +102,17 @@ $.holdReady(true);
 			});
 		}
 
+		
+function loadJsFile(url){
+	 $.ajax({
+		   async: true,    	
+		   dataType: "script",
+		   url: url,
+		   //Enable caching for performance, disable with 'cache: false'
+		   cache: false
+	});
+}
+		
 function ProcessDependency(urlArrayPointer) 
 {
 

@@ -6,6 +6,7 @@
   <groupId>BackboneJS</groupId>  					
   <artifactId>backbone</artifactId>							
   <version>0.9.10</version>
+  <packaging>prod</packaging>
 								
   <dependencies>
     <dependency>
