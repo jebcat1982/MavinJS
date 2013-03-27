@@ -8,6 +8,8 @@ var dataTables = 'http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.
 var backbonejs = 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.9/backbone-min.js';
 var jqueryui = 'http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'; 
 
+var dependency = [] ; 
+
 //var urlsToLoadInOrder = [dataTables,backbonejs,jqueryui];
 var urlsToLoadInOrder = [jqueryui];
 
@@ -17,20 +19,51 @@ $.holdReady(true);
 (function( $ ){
 	  var methods = {
 	   	init : function( options ) {	   		
-	   		
+
 			// Load Page Model Object
 			$.ajax({				   
 			    cache: "false",
 			    type: "GET",
 			    url: "pom.xml",
 			    dataType: "xml",
-			    success: function(xml) {			   
-			    	clientID = $(xml).find("artifactId").text();
+			    success: function(xml) {	
+				var url;
+				var group;
+				var artifact;
+				var version;
+				var minimized;
+					$(xml).find("dependency").each(function(){
+						 group = $(this).find("groupId").text();
+						 artifact = $(this).find("artifactId").text();
+						 version = $(this).find("version").text();
+						if(version.contains("${")){
+							version = version.replace('${', '');
+							version = version.replace('}', '');
+							version = $(xml).find(version).text();
+						}
+						 minimized = $(this).find("minimized").text();
+						if (minimized=="true"){
+							url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
+						}else{
+							url = "https://mavinjs.appspot.com/repo/"+group+"/dev/"+artifact+"-"+version+".js";
+						}
+						dependency.push(url);
+					});
+					group = $(xml).find("groupId:first").text();
+					artifact = $(xml).find("artifactId:first").text();
+					version = $(xml).find("version:first").text();
+					url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
+					dependency.push(url);
+					
+			    	//clientID = $(xml).find("artifactId").text();
 			    	//alert(clientID);
+					alert(dependency);
 			    }			   
 			});
 
-			
+
+
+
 			jQuery.ajaxSetup({
 				  beforeSend: function() {
 					  //alert('Fetching dependencies...');					  
@@ -40,9 +73,9 @@ $.holdReady(true);
 				  },
 				  success: function() {}
 			});
-	   		
 
-			
+
+
 		    //Array of fileName to include in loader      	    		   		
 	    	ProcessDependency(0);	    		    	
 	  	}

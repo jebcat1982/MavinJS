@@ -3,24 +3,23 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- The Basics -->
-  <groupId>backbone</groupId>  					
-  <artifactId>localstorage</artifactId>							
-  <version>1.8.2</version>
-  <packaging>js</packaging>
+  <groupId>BackboneJS</groupId>  					
+  <artifactId>backbone</artifactId>							
+  <version>0.9.10</version>
 								
   <dependencies>
     <dependency>
       <id>jquery</id>
-      <groupId>jquery</groupId>  					
-      <artifactId>ui</artifactId>							
+      <groupId>JQuery</groupId>  					
+      <artifactId>jquery</artifactId>							
       <version>${jqueryVersion}</version>								
       <minimized>true</minimized>   
     </dependency>
      <dependency>
-      <id>spine</id>
-      <groupId>spine</groupId>  					
-      <artifactId>spine</artifactId>							
-      <version>1.2</version>								
+      <id>Knockout</id>
+      <groupId>Knockout</groupId>  					
+      <artifactId>knockout</artifactId>							
+      <version>2.2.1</version>								
       <minimized>true</minimized>   
     </dependency>
     </dependencies>                    
