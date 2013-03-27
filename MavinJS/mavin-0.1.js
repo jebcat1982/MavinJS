@@ -8,7 +8,7 @@ var dataTables = 'http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.
 var backbonejs = 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.9/backbone-min.js';
 var jqueryui = 'http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'; 
 
-var dependency = [] ; 
+//var dependency = [] ; 
 
 //var urlsToLoadInOrder = [dataTables,backbonejs,jqueryui];
 var urlsToLoadInOrder = [jqueryui];
@@ -92,12 +92,12 @@ $.holdReady(true);
 					artifact = $(xml).find("artifactId:first").text();
 					version = $(xml).find("version:first").text();
 					url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
-					dependency.push(url);
+					//dependency.push(url);
 					alert(url+"   loading now ....");
 					loadJsFile(url);
 			    	//clientID = $(xml).find("artifactId").text();
 			    	//alert(clientID);
-					alert(dependency);
+					//alert(dependency);
 			    }			   
 			});
 		}
