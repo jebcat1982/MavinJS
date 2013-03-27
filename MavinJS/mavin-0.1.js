@@ -3,6 +3,10 @@
  * Author: Eran Israeli
  * License: GPLv3
  *************************/
+var dependenciesList = [];
+var dict = {};
+
+
 
 var dataTables = 'http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js';
 var backbonejs = 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.9/backbone-min.js';
@@ -13,6 +17,9 @@ var jqueryui = 'http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery-ui.m
 //var urlsToLoadInOrder = [dataTables,backbonejs,jqueryui];
 var urlsToLoadInOrder = [jqueryui];
 
+
+
+
 $.holdReady(true);
 
 //http://docs.jquery.com/Plugins/Authoring
@@ -21,6 +28,7 @@ $.holdReady(true);
 	   	init : function( options ) {	   		
 
 			loadDependency("pom.xml");
+			window.setTimeout(loadScriptFromMap,5000);
 
 			jQuery.ajaxSetup({
 				  beforeSend: function() {
@@ -35,7 +43,7 @@ $.holdReady(true);
 
 
 		    //Array of fileName to include in loader      	    		   		
-	    	ProcessDependency(0);	    		    	
+	    	//ProcessDependency(0);	    		    	
 	  	}
 	  };
 
@@ -53,6 +61,18 @@ $.holdReady(true);
 	    };	    	    	 
 })( jQuery );
 
+
+function loadScriptFromMap(){
+	// Get the size of an object
+	for(var key in dict) {
+	  if (dict.hasOwnProperty(key)) {
+		alert("loading ..." + dict[key].url);
+		loadJsFile(dict[key].url)
+	  }
+	}			
+}
+
+
  function loadDependency(pomFile){
 	  
 	  // Load Page Model Object
@@ -67,6 +87,8 @@ $.holdReady(true);
 				var artifact;
 				var version;
 				var minimized;
+				var key;
+				var value;
 					$(xml).find("dependency").each(function(){
 						 group = $(this).find("groupId").text();
 						 artifact = $(this).find("artifactId").text();
@@ -76,6 +98,13 @@ $.holdReady(true);
 							version = version.replace('}', '');
 							version = $(xml).find(version).text();
 						}
+						
+						
+						key= group+"-"+artifact;
+						
+						value = { version:version, url:"https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js"};
+						//value = version+","+"https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
+						addToMap(key,value);
 						/*
 						minimized = $(this).find("minimized").text();
 						if (minimized=="true"){
@@ -84,6 +113,9 @@ $.holdReady(true);
 							url = "https://mavinjs.appspot.com/repo/"+group+"/dev/"+artifact+"-"+version+".js";
 						}
 						*/
+						
+						
+						
 						loadDependency("https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".pom.xml");
 
 						//dependency.push(url);
@@ -92,16 +124,51 @@ $.holdReady(true);
 					artifact = $(xml).find("artifactId:first").text();
 					version = $(xml).find("version:first").text();
 					url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
+					
+					key= group+"-"+artifact;
+					value = { version:version, url:"https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js"};
+					addToMap(key,value);
+						 
+						 
 					//dependency.push(url);
-					alert(url+"   loading now ....");
-					loadJsFile(url);
+					//alert(url+"   loading now ....");
+					//loadJsFile(url);
 			    	//clientID = $(xml).find("artifactId").text();
 			    	//alert(clientID);
 					//alert(dependency);
-			    }			   
+			    }
+				
 			});
 		}
 
+
+
+function addToMap(key,value){
+	var mapValue=dict[key];
+	
+	if(mapValue==null){
+		dict[key]=value;
+	}else{
+			
+			var ver = value.version;
+			var mapVer = mapValue.version;
+			var mapVerArrayLength = mapVer.toString().replace(/\./g,'').length;
+			var versionArrayLength = ver.toString().replace(/\./g,'').length;
+			var myLength;
+			if(mapVerArrayLength<versionArrayLength){
+				myLength=mapVerArrayLength;
+			}else{
+				myLength=versionArrayLength;
+			}
+			for (var i=0;i<myLength;i++){
+				if (mapVer[i]<ver[i]){
+					// map version is old , need to replace
+					dict[key]=value;
+					break;
+				}
+			}
+	}
+}
 		
 function loadJsFile(url){
 	 $.ajax({
