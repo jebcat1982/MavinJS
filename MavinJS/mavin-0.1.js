@@ -69,7 +69,7 @@ function loadScriptFromMap(){
 	for(var key in dict) {
 	  if (dict.hasOwnProperty(key)) {
 		alert("loading ..." + dict[key].url);
-		loadJsFile(dict[key].url)
+		loadJsFile(dict[key].url);
 	  }
 	}			
 }
@@ -151,11 +151,11 @@ function addToMap(key,value){
 	if(mapValue==null){
 		dict[key]=value;
 	}else{
-			// compare 1.8.2 with 2.0
-			var ver = value.version;  //1.8.2
-1			var mapVer = mapValue.version; // 2.0
-			var mapVerArrayLength = mapVer.toString().replace(/\./g,'').length; //3
-			var versionArrayLength = ver.toString().replace(/\./g,'').length; //2
+			//compare 1.8.2 with 2.0
+			var ver = value.version; //2.0
+			var mapVer = mapValue.version; //1.8.2
+			var mapVerArrayLength = mapVer.toString().replace(/\./g,'').length;
+			var versionArrayLength = ver.toString().replace(/\./g,'').length;
 			var myLength;
 			if(mapVerArrayLength<versionArrayLength){
 				myLength=mapVerArrayLength;
@@ -165,7 +165,7 @@ function addToMap(key,value){
 			for (var i=0;i<myLength;i++){
 				if (mapVer[i]<ver[i]){
 					// map version is old , need to replace
-					dict[key]=value;  // replace to 2.0 version and url 
+					dict[key]=value;
 					break;
 				}
 			}
@@ -183,7 +183,7 @@ function loadJsFile(url){
 }
 		
 		
-		
+
 function ProcessDependency(urlArrayPointer) 
 {
 
