@@ -3,19 +3,19 @@
  * Author: Eran Israeli
  * License: GPLv3
  *************************/
-var dependenciesList = [];
+//var dependenciesList = [];
 var dict = {};
 
 
-
+/*
 var dataTables = 'http://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js';
 var backbonejs = 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.9/backbone-min.js';
 var jqueryui = 'http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'; 
-
+*/
 //var dependency = [] ; 
 
 //var urlsToLoadInOrder = [dataTables,backbonejs,jqueryui];
-var urlsToLoadInOrder = [jqueryui];
+//var urlsToLoadInOrder = [jqueryui];
 
 
 
@@ -28,6 +28,8 @@ $.holdReady(true);
 	   	init : function( options ) {	   		
 
 			loadDependency("pom.xml");
+			
+			// need time out as i need to know when all ajax will end - TODO !!!
 			window.setTimeout(loadScriptFromMap,5000);
 
 			jQuery.ajaxSetup({
@@ -100,11 +102,11 @@ function loadScriptFromMap(){
 						}
 						
 						
-						key= group+"-"+artifact;
+						//key= group+"-"+artifact;
 						
-						value = { version:version, url:"https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js"};
+						//value = { version:version, url:"https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js"};
 						//value = version+","+"https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
-						addToMap(key,value);
+						//addToMap(key,value);
 						/*
 						minimized = $(this).find("minimized").text();
 						if (minimized=="true"){
@@ -149,11 +151,11 @@ function addToMap(key,value){
 	if(mapValue==null){
 		dict[key]=value;
 	}else{
-			
-			var ver = value.version;
-			var mapVer = mapValue.version;
-			var mapVerArrayLength = mapVer.toString().replace(/\./g,'').length;
-			var versionArrayLength = ver.toString().replace(/\./g,'').length;
+			// compare 1.8.2 with 2.0
+			var ver = value.version;  //1.8.2
+1			var mapVer = mapValue.version; // 2.0
+			var mapVerArrayLength = mapVer.toString().replace(/\./g,'').length; //3
+			var versionArrayLength = ver.toString().replace(/\./g,'').length; //2
 			var myLength;
 			if(mapVerArrayLength<versionArrayLength){
 				myLength=mapVerArrayLength;
@@ -163,7 +165,7 @@ function addToMap(key,value){
 			for (var i=0;i<myLength;i++){
 				if (mapVer[i]<ver[i]){
 					// map version is old , need to replace
-					dict[key]=value;
+					dict[key]=value;  // replace to 2.0 version and url 
 					break;
 				}
 			}
@@ -179,6 +181,8 @@ function loadJsFile(url){
 		   cache: false
 	});
 }
+		
+		
 		
 function ProcessDependency(urlArrayPointer) 
 {
