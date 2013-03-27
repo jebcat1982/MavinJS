@@ -20,49 +20,7 @@ $.holdReady(true);
 	  var methods = {
 	   	init : function( options ) {	   		
 
-			// Load Page Model Object
-			$.ajax({				   
-			    cache: "false",
-			    type: "GET",
-			    url: "pom.xml",
-			    dataType: "xml",
-			    success: function(xml) {	
-				var url;
-				var group;
-				var artifact;
-				var version;
-				var minimized;
-					$(xml).find("dependency").each(function(){
-						 group = $(this).find("groupId").text();
-						 artifact = $(this).find("artifactId").text();
-						 version = $(this).find("version").text();
-						if(version.contains("${")){
-							version = version.replace('${', '');
-							version = version.replace('}', '');
-							version = $(xml).find(version).text();
-						}
-						 minimized = $(this).find("minimized").text();
-						if (minimized=="true"){
-							url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
-						}else{
-							url = "https://mavinjs.appspot.com/repo/"+group+"/dev/"+artifact+"-"+version+".js";
-						}
-						dependency.push(url);
-					});
-					group = $(xml).find("groupId:first").text();
-					artifact = $(xml).find("artifactId:first").text();
-					version = $(xml).find("version:first").text();
-					url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
-					dependency.push(url);
-					
-			    	//clientID = $(xml).find("artifactId").text();
-			    	//alert(clientID);
-					alert(dependency);
-			    }			   
-			});
-
-
-
+			loadDependency("pom.xml");
 
 			jQuery.ajaxSetup({
 				  beforeSend: function() {
@@ -95,7 +53,53 @@ $.holdReady(true);
 	    };	    	    	 
 })( jQuery );
 
+ function loadDependency(pomFile){
+	  
+	  // Load Page Model Object
+			$.ajax({				   
+			    cache: "false",
+			    type: "GET",
+			    url: pomFile,
+			    dataType: "xml",
+			    success: function(xml) {	
+				var url;
+				var group;
+				var artifact;
+				var version;
+				var minimized;
+					$(xml).find("dependency").each(function(){
+						 group = $(this).find("groupId").text();
+						 artifact = $(this).find("artifactId").text();
+						 version = $(this).find("version").text();
+						if(version.contains("${")){
+							version = version.replace('${', '');
+							version = version.replace('}', '');
+							version = $(xml).find(version).text();
+						}
+						/*
+						minimized = $(this).find("minimized").text();
+						if (minimized=="true"){
+							url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
+						}else{
+							url = "https://mavinjs.appspot.com/repo/"+group+"/dev/"+artifact+"-"+version+".js";
+						}
+						*/
+						loadDependency("https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".pom.xml");
 
+						//dependency.push(url);
+					});
+					group = $(xml).find("groupId:first").text();
+					artifact = $(xml).find("artifactId:first").text();
+					version = $(xml).find("version:first").text();
+					url = "https://mavinjs.appspot.com/repo/"+group+"/prod/"+artifact+"-"+version+".min.js";
+					dependency.push(url);
+					
+			    	//clientID = $(xml).find("artifactId").text();
+			    	//alert(clientID);
+					alert(dependency);
+			    }			   
+			});
+		}
 
 function ProcessDependency(urlArrayPointer) 
 {
