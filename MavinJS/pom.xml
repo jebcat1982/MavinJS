@@ -1,68 +1,67 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
 
-  <!-- The Basics -->
-  <groupId>BackboneJS</groupId>  					
-  <artifactId>backbone</artifactId>							
-  <version>0.9.10</version>
-								
-  <dependencies>
-    <dependency>
-      <id>jquery</id>
-      <groupId>JQuery</groupId>  					
-      <artifactId>jquery</artifactId>							
-      <version>${jqueryVersion}</version>								
-      <minimized>true</minimized>   
-    </dependency>
-	<dependency>
-      <id>jquery</id>
-      <groupId>JQuery</groupId>  					
-      <artifactId>jquery</artifactId>							
-      <version>2.0</version>								
-      <minimized>true</minimized>   
-    </dependency>
-     <dependency>
-      <id>Knockout</id>
-      <groupId>Knockout</groupId>  					
-      <artifactId>knockout</artifactId>							
-      <version>2.2.1</version>								
-      <minimized>true</minimized>   
-    </dependency>
-    </dependencies>                    
-     <parent></parent>
-  <dependencyManagement></dependencyManagement>
-  <properties>
-     <jqueryVersion>1.8.2</jqueryVersion>
-  </properties>                         
+	<!-- The Basics -->
+	<groupId>BackboneJS</groupId>
+	<artifactId>backbone</artifactId>
+	<version>0.9.10</version>
 
-  <!-- Build Settings -->
-  <build>
-   <loadOrder> 
-      <artifactID>spine</artifactID>
-       <artifactID>jquery</artifactID>
-   </loadOrder>
- </build>                                    
+	<dependencies>
+		<dependency>
+			<id>jquery</id>
+			<groupId>JQuery</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jqueryVersion}</version>
+			<minimized>true</minimized>
+		</dependency>
+		<dependency>
+			<id>jquery</id>
+			<groupId>JQuery</groupId>
+			<artifactId>jquery</artifactId>
+			<version>2.0</version>
+			<minimized>true</minimized>
+		</dependency>
+		<dependency>
+			<id>Knockout</id>
+			<groupId>Knockout</groupId>
+			<artifactId>knockout</artifactId>
+			<version>2.2.1</version>
+			<minimized>true</minimized>
+		</dependency>
+	</dependencies>
+	<parent></parent>
+	<dependencyManagement></dependencyManagement>
+	<properties>
+		<jqueryVersion>1.8.2</jqueryVersion>
+	</properties>
 
-   <!-- More Project Information -->
-  <name></name>
-  <description></description>
-  <url></url>
-  <inceptionYear></inceptionYear>
-  <licenses></licenses>
-  <organization></organization>
-  <developers></developers>
-  <contributors></contributors>
+	<!-- Build Settings -->
+	<build>
+		<loadOrder>
+			<artifactID>spine</artifactID>
+			<artifactID>jquery</artifactID>
+		</loadOrder>
+	</build>
 
-  <!-- Environment Settings -->
-  <repositories>
-   <repository>
-     <url>k:\sharedJS</url>
-   </repository>
-</repositories>                     
-  <localRepositoriy>
-   <repository>
-     <url>c:\repoJS</url>
-   </repository>
-</localRepositoriy>             
+	<!-- More Project Information -->
+	<name></name>
+	<description></description>
+	<url></url>
+	<inceptionYear></inceptionYear>
+	<licenses></licenses>
+	<organization></organization>
+	<developers></developers>
+	<contributors></contributors>
+
+	<!-- Environment Settings -->
+	<repositories>
+		<repository>
+			<url>k:\sharedJS</url>
+		</repository>
+	</repositories>
+	<localRepositoriy>
+		<repository>
+			<url>c:\repoJS</url>
+		</repository>
+	</localRepositoriy>
 </project>
