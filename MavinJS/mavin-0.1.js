@@ -1,5 +1,7 @@
 /*******************************************************************************
- * File: mavin-0.1.js Author: Eran Israeli License: GPLv3
+ * File: mavin-0.1.js 
+ * Authors: Eran Israeli, Dori Waldman 
+ * License: GPLv3
  ******************************************************************************/
 // var dependenciesList = [];
 var dict = {};
@@ -83,7 +85,11 @@ function loadDependency(pomFile) {
 						group = $(this).find("groupId").text();
 						artifact = $(this).find("artifactId").text();
 						version = $(this).find("version").text();
+						
+						// The ECMAScript 6 .contains() method makes this check simpler (and more readable), 
+						// but so far it's only implemented in Firefox ATM.
 						if (version.contains("${")) {
+						//if (version.indexOf("${") != -1 ) {						
 							version = version.replace('${', '');
 							version = version.replace('}', '');
 							version = $(xml).find(version).text();
@@ -173,6 +179,7 @@ function loadJsFile(url) {
 		cache : false
 	});
 }
+
 
 
 function ProcessDependency(urlArrayPointer) {
