@@ -68,10 +68,19 @@ function loadDependency(pomFile) {
 
 	// Load Page Model Object
 	$.ajax({
-		cache : "false",
 		type : "GET",
 		url : pomFile,
-		dataType : "xml",
+		contentType: 'text/plain',
+		xhrFields: {
+			withCredentials: false 
+		},
+		headers: {
+			
+		},
+		
+		cache : "false",
+		
+		//dataType : "xml",
 		success : function(xml) {
 			var url;
 			var group;
