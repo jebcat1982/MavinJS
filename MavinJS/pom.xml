@@ -9,14 +9,14 @@
 	<dependencies>
 		<dependency>
 			<id>jquery</id>
-			<groupId>JQuery</groupId>
+			<groupId>jQuery</groupId>
 			<artifactId>jquery</artifactId>
 			<version>${jqueryVersion}</version>
 			<minimized>true</minimized>
 		</dependency>
 		<dependency>
 			<id>jquery</id>
-			<groupId>JQuery</groupId>
+			<groupId>jQuery</groupId>
 			<artifactId>jquery</artifactId>
 			<version>1.8.2</version>
 			<minimized>true</minimized>
